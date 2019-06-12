@@ -5,14 +5,14 @@ class Posts extends Component {
     return (
       <section className="container">
        <h1 className="large text-primary">Posts</h1>
-       <p className="lead"><i className="fas fa-user"></i> Welcome to the community</p>
+       <p className="lead"><i className="fas fa-user"></i> Bem vindo à comunidade.</p>
        <div className="post-form">
            <div className="post-form-header bg-primary">
-               <h3>Say something...</h3>
+               <h3>Diga algo...</h3>
            </div>
            <form className="form my-1">
-               <textarea cols="30" rows="5" placeholder="Create a post"></textarea>
-               <input type="submit" value="Submit" className="btn btn-dark my-1" />
+               <textarea cols="30" rows="5" placeholder="Crie seu post..."></textarea>
+               <input type="submit" value="Enviar" className="btn btn-dark my-1" />
            </form>
            <div className="posts">
                <div className="post bg-white my-1">
@@ -37,7 +37,7 @@ class Posts extends Component {
                        <button className="btn">
                            <i className="fas fa-thumbs-down"></i> <span>2</span>
                        </button>
-                       <a href="post" className="btn btn-primary">Discussion</a>
+                       <a href="post" className="btn btn-primary">Discussão</a>
                    </div>
                </div>
                <div className="post bg-white my-1">
@@ -62,7 +62,7 @@ class Posts extends Component {
                     <button className="btn">
                         <i className="fas fa-thumbs-down"></i> <span>2</span>
                     </button>
-                    <a href="post" className="btn btn-primary">Discussion</a>
+                    <a href="post" className="btn btn-primary">Discussão</a>
                 </div>
             </div>
            </div>

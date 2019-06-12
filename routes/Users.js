@@ -51,12 +51,16 @@ user.post('/update',(req,res)=>{
 
 user.post('/register',(req,res)=>{
     const today = new Date();
+    
     const userData = {
         name: req.body.name,
         email: req.body.email,
+        img_link: req.body.img_link,
         password: req.body.password,
         created: today
     }
+    console.log(userData);
+    
     User.findOne({
         where: {
             email: req.body.email

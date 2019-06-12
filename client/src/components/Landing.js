@@ -5,12 +5,12 @@ export default function Landing() {
     <section className="landing">
         <div className="dark-overlay">
             <div className="landing-inner">
-                <h1 className="x-large">Developer Connector</h1>
-                <p className="lead">Create developer profile/portifolio,
-                    share posts and get help from other developers
+                <h1 className="x-large">Dev Connector</h1>
+                <p className="lead">Crie seu portifólio / perfil de desenvolvedor, compartilhe
+                posts e consiga ajuda de outros desenvolvedores.
                 </p>
                 <div className="buttons">
-                    <a href="register" className="btn btn-primary">Sign Up</a>
+                    <a href="register" className="btn btn-primary">Cadastro</a>
                     <a href="login" className="btn btn">Login</a>
                 </div>
             </div>

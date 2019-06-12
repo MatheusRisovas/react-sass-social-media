@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom';
-
+import Swal from 'sweetalert2';
 
 class NavBar extends Component {
   
   logOut(e){
     e.preventDefault();
-    localStorage.removeItem('usertoken');
-    this.props.history.push('/');
+    Swal.fire({
+      title:'Aviso!',
+      text:'Deseja mesmo sair?',
+      type:'question',
+      showConfirmButton:true,
+      confirmButtonText:'Sim',
+      showCancelButton:true,
+      cancelButtonText:'Não'
+    }).then(willDelete => {
+      localStorage.removeItem('usertoken');
+      this.props.history.push('/');
+    });
   }
   render() {
     const loginRegLink = (
@@ -19,7 +29,7 @@ class NavBar extends Component {
     );
     const userLink = (
       <ul>
-        <li><Link to='/profiles'>Developers</Link></li>
+        <li><Link to='/profiles'>Devs</Link></li>
             <li><Link to='/posts'>Posts</Link></li>
             <li><Link to='dashboard'><i className="fas fa-user"></i><span className="hide-sm"> Dashboard</span></Link></li>
             <li><a href='/' onClick={this.logOut.bind(this)}><i className="fas fa-sign-out-alt"></i><span className="hide-sm"> Sair</span></a></li>

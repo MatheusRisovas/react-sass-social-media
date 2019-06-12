@@ -63,12 +63,12 @@ class Profile extends Component {
             </div>
             {/* <!-- About --> */}
             <div className="profile-about bg-light p-2">
-                <h2 className="text-primary">Descrição do {this.state.user.name}</h2>
+                <h2 className="text-primary">Descrição de {this.state.user.name}</h2>
                 <p>
                   {this.state.user.bio}
                 </p>
                 <div className="line"></div>
-                <h2 className="text-primary">Skill Set</h2>
+                <h2 className="text-primary">Skills</h2>
                 <div className="skills">
                     <div className="p-1">
                         <i className="fas fa-check"></i> HTML
