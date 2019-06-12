@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 import {selectProfiles} from './ProfileFunctions';
 
 class Profiles extends Component {

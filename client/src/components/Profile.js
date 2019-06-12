@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {selectExp} from './ExperiencesFunctions';
 import {selectEdu} from './EducationFunctions';
 import {selectProfile} from './ProfileFunctions';
@@ -44,19 +44,19 @@ class Profile extends Component {
                 <p className="lead">{this.state.user.position} em {this.state.user.company}</p>
                 <p>{this.state.user.city}, {this.state.user.state}</p>
                 <div className="icons my-1">
-                    <a href="#">
+                    <a href="https://www.google.com.br/">
                         <i className="fas fa-globe fa-2x"></i>
                     </a>
-                    <a href="#">
+                    <a href="https://twitter.com/">
                         <i className="fab fa-twitter fa-2x"></i>
                     </a>
-                    <a href="#">
+                    <a href="https://www.facebook.com/">
                         <i className="fab fa-facebook fa-2x"></i>
                     </a>
-                    <a href="#">
+                    <a href="https://br.linkedin.com/">
                         <i className="fab fa-linkedin fa-2x"></i>
                     </a>
-                    <a href="#">
+                    <a href="https://www.instagram.com">
                         <i className="fab fa-instagram fa-2x"></i>
                     </a>
                 </div>
@@ -109,7 +109,7 @@ class Profile extends Component {
                 </h2>
                 <div className="repo bg-white my-1 p-1">
                   <div>
-                    <h4><a href="#">Repo One</a></h4>
+                    <h4><a href="https://github.com/">Repo One</a></h4>
                     <p>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Facilis, tenetur.
@@ -127,7 +127,7 @@ class Profile extends Component {
       
                 <div className="repo bg-white my-1 p-1">
                   <div>
-                    <h4><a href="#">Repo Two</a></h4>
+                    <h4><a href="https://github.com/">Repo Two</a></h4>
                     <p>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Facilis, tenetur.
@@ -145,7 +145,7 @@ class Profile extends Component {
       
                 <div className="repo bg-white my-1 p-1">
                   <div>
-                    <h4><a href="#">Repo One</a></h4>
+                    <h4><a href="https://github.com/">Repo One</a></h4>
                     <p>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Facilis, tenetur.

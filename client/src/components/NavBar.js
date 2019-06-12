@@ -3,9 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 
 class NavBar extends Component {
-  constructor(){
-    super();
-}
+  
   logOut(e){
     e.preventDefault();
     localStorage.removeItem('usertoken');
@@ -24,7 +22,7 @@ class NavBar extends Component {
         <li><Link to='/profiles'>Developers</Link></li>
             <li><Link to='/posts'>Posts</Link></li>
             <li><Link to='dashboard'><i className="fas fa-user"></i><span className="hide-sm"> Dashboard</span></Link></li>
-            <li><a href='' onClick={this.logOut.bind(this)}><i className="fas fa-sign-out-alt"></i><span className="hide-sm"> Sair</span></a></li>
+            <li><a href='/' onClick={this.logOut.bind(this)}><i className="fas fa-sign-out-alt"></i><span className="hide-sm"> Sair</span></a></li>
       </ul>
     );
     return (
