@@ -66,7 +66,7 @@ class Register extends Component {
                         <input type="text" name='img_link' value={this.state.img_link} onChange={this.onChange} placeholder="Link da Imagem" required />
                     </div>
                     <div className="form-group">
-                        <input type="email" name='email' value={this.state.email} onChange={this.onChange} placeholder="Email" />
+                        <input type="email" name='email' value={this.state.email} onChange={this.onChange} placeholder="Email" required />
                     </div>
                     <div className="form-group">
                         <input type="password" name='password' value={this.state.password} onChange={this.onChange} placeholder="Senha" minLength="6" />
