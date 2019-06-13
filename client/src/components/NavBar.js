@@ -22,7 +22,7 @@ class NavBar extends Component {
   render() {
     const loginRegLink = (
       <ul>          
-        <li><Link to='/profiles'>Developers</Link></li>
+        <li><Link to='/profiles'>Devs</Link></li>
         <li><Link to='/login'>Login</Link></li>
         <li><Link to='/register'>Cadastro</Link></li>
       </ul>

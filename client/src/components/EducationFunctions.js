@@ -21,3 +21,12 @@ export const selectEdu = () => {
             res.send(res);
         })
 }
+
+export const deleteEdu = (id) => {
+    return axios.post('education/delete', {
+            id: id
+        })
+        .then(res => {
+            return res;
+        })
+}

@@ -40,9 +40,9 @@ class Profile extends Component {
             <div className="profile-top bg-primary p-2">
                 <img src={this.state.user.img_link} alt=""
                     className="round-img my-1" />
-                <h1 className="large">{this.state.user.name}</h1>
-                <p className="lead">{this.state.user.position} em {this.state.user.company}</p>
-                <p>{this.state.user.city}, {this.state.user.state}</p>
+                <h1 className="large">{this.state.user.nome}</h1>
+                <p className="lead">{this.state.user.cargo} em {this.state.user.empresa}</p>
+                <p>{this.state.user.cidade}, {this.state.user.estado}</p>
                 <div className="icons my-1">
                     <a href="https://www.google.com.br/">
                         <i className="fas fa-globe fa-2x"></i>
@@ -63,7 +63,7 @@ class Profile extends Component {
             </div>
             {/* <!-- About --> */}
             <div className="profile-about bg-light p-2">
-                <h2 className="text-primary">Descrição de {this.state.user.name}</h2>
+                <h2 className="text-primary">Descrição de {this.state.user.nome}</h2>
                 <p>
                   {this.state.user.bio}
                 </p>
@@ -88,8 +88,8 @@ class Profile extends Component {
             <div className="profile-exp bg-white p-2">
                 <h2 className="text-primary">Experiências</h2>
                 {this.state.experiences.map((exp)=>(
-                  <ExperiencesItem key={exp.id} company={exp.company} from_date={exp.from_date} to_date={exp.to_date} 
-                  position={exp.position} description={exp.description} />
+                  <ExperiencesItem key={exp.id} company={exp.empresa} from_date={exp.data_inicio} to_date={exp.data_fim} 
+                  position={exp.cargo} description={exp.descricao} />
                 )) 
                 }
             </div>
@@ -97,8 +97,8 @@ class Profile extends Component {
             <div className="profile-edu bg-white p-2">
                     <h2 className="text-primary">Educação</h2>
                     {this.state.education.map((edu)=>(
-                  <EducationItem key={edu.id} institution={edu.institution} from_date={edu.from_date} to_date={edu.to_date} 
-                  degree={edu.degree} description={edu.description} />
+                  <EducationItem key={edu.id} institution={edu.instituicao} from_date={edu.data_inicio} to_date={edu.data_fim} 
+                  degree={edu.grau} description={edu.descricao} />
                 )) 
                 }
           </div>

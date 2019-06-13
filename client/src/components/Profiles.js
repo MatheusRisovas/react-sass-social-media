@@ -26,9 +26,9 @@ class Profiles extends Component {
             <div className="profile bg-light">
                 <img src={user.img_link} alt="" className="round-img" />
                 <div>
-                    <h2>{user.name}</h2>
-                    <p>{user.position} em {user.company}</p>
-                    <p>{user.city}, {user.state}</p>
+                    <h2>{user.nome}</h2>
+                    <p>{user.position} em {user.empresa}</p>
+                    <p>{user.cidade}, {user.estado}</p>
                     <Link to='/profile' className="btn btn-primary">Ver Perfil</Link>
                 </div>
                 <ul>

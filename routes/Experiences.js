@@ -46,6 +46,7 @@ experience.post('/create', (req, res) => {
 experience.get('/select', (req, res) => {
     banco.conectar().then(pool => {
         return pool.request().query(`SELECT 
+            id,
             empresa,
             cargo,
             FORMAT(data_inicio,'dd/MM/yyyy') as data_inicio,
@@ -58,5 +59,17 @@ experience.get('/select', (req, res) => {
         banco.sql.close();
     })
 })
+
+experience.post('/delete', (req, res) => {
+    banco.conectar().then(pool => {
+        let { id } = req.body;
+        console.log(`ID: ${JSON.stringify(id)}`);
+        return pool.request().query(`DELETE FROM Exp WHERE id = ${id}`);
+    }).then(() => {
+        res.sendStatus(200);
+    }).finally(() => {
+        banco.sql.close();
+    })
+});
 
 module.exports = experience;

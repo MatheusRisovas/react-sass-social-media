@@ -2,10 +2,9 @@ const express = require('express');
 const user = express.Router();
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 var banco = require('../app-banco');
 
-const User = require('../models/User');
+// const User = require('../models/User');
 user.use(cors());
 
 process.env.SECRET_KEY = 'secret';

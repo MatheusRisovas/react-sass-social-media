@@ -20,3 +20,12 @@ export const selectExp = () => {
             res.send(res);
         })
 }
+
+export const deleteExp = (id) => {
+    return axios.post('experience/delete', {
+            id: id
+        })
+        .then(res => {
+            return res;
+        })
+}

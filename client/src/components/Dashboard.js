@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import jwt_decode from 'jwt-decode';
 import { selectProfile } from './ProfileFunctions';
-import { selectExp } from './ExperiencesFunctions';
-import {selectEdu} from './EducationFunctions';
-
+import { selectExp,deleteExp } from './ExperiencesFunctions';
+import { selectEdu,deleteEdu } from './EducationFunctions';
+import Swal from 'sweetalert2';
 
 class Dashboard extends Component {
     constructor(){
@@ -14,6 +14,50 @@ class Dashboard extends Component {
             education:[]
         };
     }
+
+    onDeleteExp = (id)=>{
+        deleteExp(id).then(res=>{
+            if(res){
+                Swal.fire({
+                    title:'Sucesso!',
+                    text:'Experiência profissional foi apagada com sucesso!',
+                    type:'success'
+                }).then(willDelete=> {
+                    window.location.reload();
+                });
+            }else{
+
+            }
+        })
+    };
+
+    onDeleteEdu = (id) => {
+        deleteEdu(id).then(res=>{
+            if(res){
+                Swal.fire({
+                    title:'Sucesso!',
+                    text:'Experiência acadêmica foi apagada com sucesso!',
+                    type:'success'
+                }).then(willDelete=> {
+                    window.location.reload();
+                });
+            }else{
+
+            }
+        })
+    }
+
+    atualizarExp = ()=>{
+        return this.state.experiences.map(exp=>(
+            <tr>
+            <td>{exp.empresa}</td>
+            <td className="hide-sm">{exp.cargo}</td>
+            <td className="hide-sm">{exp.data_inicio} até {exp.data_fim}</td>
+            <td><button className="btn btn-danger" onClick={()=>this.onDeleteExp(exp.id)}>Apagar</button></td>
+        </tr>
+        ))
+    }
+
     componentWillMount(){
         const token = localStorage.usertoken;
         const decoded = jwt_decode(token);
@@ -50,15 +94,8 @@ class Dashboard extends Component {
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
-                {this.state.experiences.map(exp=>(
-                    <tr>
-                    <td>{exp.empresa}</td>
-                    <td className="hide-sm">{exp.cargo}</td>
-                    <td className="hide-sm">{exp.data_inicio} até {exp.data_fim}</td>
-                    <td><button className="btn btn-danger">Apagar</button></td>
-                </tr>
-                ))}    
+            <tbody id="tbodyExp">
+                {this.atualizarExp()}
             </tbody>
         </table>
         <h2 className="my-2">
@@ -79,7 +116,7 @@ class Dashboard extends Component {
                     <td>{edu.instituicao}</td>
                         <td className="hide-sm">{edu.grau}</td>
                     <td className="hide-sm">{edu.data_inicio} até {edu.data_fim}</td>
-                    <td><button className="btn btn-danger">Apagar</button></td>
+                    <td><button onClick={()=>this.onDeleteEdu(edu.id)} className="btn btn-danger">Apagar</button></td>
                 </tr>
                 ))}   
             </tbody>
