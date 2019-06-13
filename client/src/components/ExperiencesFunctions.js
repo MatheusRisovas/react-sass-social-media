@@ -1,22 +1,22 @@
 import axios from 'axios';
 
-export const createExp = newExperience=>{
+export const createExp = newExperience => {
     return axios
-    .post('experience/create',{
-        company:newExperience.company,
-        position:newExperience.position,
-        from_date:newExperience.from_date,
-        to_date:newExperience.to_date,
-        description:newExperience.description
-    })
-    .then(res=>{
-        console.log("Created Exp");
-    })
+        .post('experience/create', {
+            empresa: newExperience.empresa,
+            cargo: newExperience.cargo,
+            data_inicio: newExperience.data_inicio,
+            data_fim: newExperience.data_fim,
+            descricao: newExperience.descricao
+        })
+        .then(res => {
+            return res;
+        })
 }
 
-export const selectExp = ()=>{
+export const selectExp = () => {
     return axios
-    .get('experience/select',(req,res) => {
-        res.send(res);
-    })
+        .get('experience/select', (req, res) => {
+            res.send(res);
+        })
 }

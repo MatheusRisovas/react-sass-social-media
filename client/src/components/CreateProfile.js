@@ -25,11 +25,11 @@ class CreateProfile extends Component {
         const token = localStorage.usertoken;
         const decoded = jwt_decode(token);
         const user = {
-            name: this.state.name,
-            position: this.state.position,
-            company: this.state.company,
-            city: this.state.city,
-            state: this.state.state,
+            nome: this.state.nome,
+            cargo: this.state.cargo,
+            empresa: this.state.empresa,
+            cidade: this.state.cidade,
+            estado: this.state.estado,
             bio: this.state.bio,
             email: this.state.email,
             img_link:this.state.img_link
@@ -48,23 +48,23 @@ class CreateProfile extends Component {
                 <small>* = campos obrigatórios</small>
                 <form onSubmit={this.onSubmit} className="form">
                     <div className="form-group">
-                        <input onChange={this.onChange} value={this.state.name} type='text' name='name' placeholder='Nome' />
+                        <input onChange={this.onChange} value={this.state.nome} type='text' name='nome' placeholder='Nome' />
                         <small className="form-text">Give us an idea of where you are at in your career</small>
                     </div>
                     <div className="form-group">
-                        <input onChange={this.onChange} value={this.state.position} type="text" placeholder="Cargo" name="position" />
+                        <input onChange={this.onChange} value={this.state.cargo} type="text" placeholder="Cargo" name="cargo" />
                         <small className="form-text">Could be your own company or one you work for</small>
                     </div>
                     <div className="form-group">
-                        <input onChange={this.onChange} value={this.state.company} type="text" placeholder="Empresa" name="company" />
+                        <input onChange={this.onChange} value={this.state.empresa} type="text" placeholder="Empresa" name="empresa" />
                         <small className="form-text">Could be your own company or one you work for</small>
                     </div>
                     <div className="form-group">
-                        <input onChange={this.onChange} value={this.state.city} type="text" placeholder="Cidade" name="city" />
+                        <input onChange={this.onChange} value={this.state.cidade} type="text" placeholder="Cidade" name="cidade" />
                         <small className="form-text">City & state suggested (eg. Boston, MA)</small>
                     </div>
                     <div className="form-group">
-                        <input onChange={this.onChange} value={this.state.state} type="text" placeholder="Estado" name="state" />
+                        <input onChange={this.onChange} value={this.state.estado} type="text" placeholder="Estado" name="estado" />
                         <small className="form-text">Could be your own or a company website</small>
                     </div>
                     <div className="form-group">

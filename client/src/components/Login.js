@@ -20,7 +20,6 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }
-
         login(user).then(res => {
             if (res) {
                 Swal.fire({
@@ -28,7 +27,7 @@ class Login extends Component {
                     text: 'Login realizado com sucesso!',
                     type: 'success',
                     button: 'Ok!'
-                }).then(a => {
+                }).then(() => {
                     this.props.history.push(`/dashboard`);
                 });
             } else {

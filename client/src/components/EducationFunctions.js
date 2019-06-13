@@ -1,23 +1,23 @@
 import axios from 'axios';
 
-export const createEdu = newEducation=>{
+export const createEdu = newEducation => {
     return axios
-    .post('education/create',{
-        institution:newEducation.institution,
-        degree:newEducation.degree,
-        field_of_study:newEducation.field_of_study,
-        from_date:newEducation.from_date,
-        to_date:newEducation.to_date,
-        description:newEducation.description
-    })
-    .then(res=>{
-        console.log("Created Edu");
-    })
+        .post('education/create', {
+            instituicao: newEducation.instituicao,
+            grau: newEducation.grau,
+            area_de_estudo: newEducation.area_de_estudo,
+            data_inicio: newEducation.data_inicio,
+            data_fim: newEducation.data_fim,
+            descricao: newEducation.descricao
+        })
+        .then(res => {
+            return res;
+        })
 }
 
-export const selectEdu = ()=>{
+export const selectEdu = () => {
     return axios
-    .get('education/select',(req,res) => {
-        res.send(res);
-    })
+        .get('education/select', (req, res) => {
+            res.send(res);
+        })
 }

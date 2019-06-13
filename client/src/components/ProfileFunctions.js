@@ -1,28 +1,27 @@
 import axios from 'axios';
 
-export const updateProfile = (Profile,ID)=>{
+export const updateProfile = (Profile, ID) => {
     return axios
-    .post('user/update',{
-        name:Profile.name,
-        position:Profile.position,
-        company:Profile.company,
-        city:Profile.city,
-        state:Profile.state,
-        bio:Profile.bio,
-        email: Profile.email,
-        img_link:Profile.img_link,
-        id:ID
-    })
-    .then(res=>{
-       return res;
-    })
+        .post('user/update', {
+            nome: Profile.nome,
+            cargo: Profile.cargo,
+            empresa: Profile.empresa,
+            cidade: Profile.cidade,
+            estado: Profile.estado,
+            bio: Profile.bio,
+            email: Profile.email,
+            img_link: Profile.img_link,
+            id: ID
+        })
+        .then(res => {
+            return res;
+        })
 }
 
 export const selectProfile = (ID) => {
     return axios
         .get(`user/select`, {
-            params:
-            {
+            params: {
                 id: ID
             }
         }, (req, res) => {

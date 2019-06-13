@@ -32,7 +32,7 @@ class Dashboard extends Component {
     return (
         <section className="container">
         <h1 className="large text-primary">Dashboard</h1>
-        <p className="lead"><i className="fas fa-user"></i> Olá {this.state.user.name}</p>
+        <p className="lead"><i className="fas fa-user"></i> Olá {this.state.user.nome}</p>
         <div className="dash-buttons">
             <a href="create-profile" className="btn"><i className="fas fa-user-circle text-primary"></i> Editar Perfil</a>
             <a href="add-experience" className="btn"><i className="fab fa-black-tie text-primary"></i> Add Experiência</a>
@@ -53,9 +53,9 @@ class Dashboard extends Component {
             <tbody>
                 {this.state.experiences.map(exp=>(
                     <tr>
-                    <td>{exp.company}</td>
-                    <td className="hide-sm">{exp.position}</td>
-                    <td className="hide-sm">{exp.from_date} até {exp.to_date}</td>
+                    <td>{exp.empresa}</td>
+                    <td className="hide-sm">{exp.cargo}</td>
+                    <td className="hide-sm">{exp.data_inicio} até {exp.data_fim}</td>
                     <td><button className="btn btn-danger">Apagar</button></td>
                 </tr>
                 ))}    
@@ -76,9 +76,9 @@ class Dashboard extends Component {
             <tbody>
             {this.state.education.map(edu=>(
                     <tr>
-                    <td>{edu.institution}</td>
-                        <td className="hide-sm">{edu.degree}</td>
-                    <td className="hide-sm">{edu.from_date} até {edu.to_date}</td>
+                    <td>{edu.instituicao}</td>
+                        <td className="hide-sm">{edu.grau}</td>
+                    <td className="hide-sm">{edu.data_inicio} até {edu.data_fim}</td>
                     <td><button className="btn btn-danger">Apagar</button></td>
                 </tr>
                 ))}   
