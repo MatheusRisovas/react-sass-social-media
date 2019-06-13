@@ -1,6 +1,57 @@
 import React, { Component } from 'react'
+import {selectPosts, createPost} from './PostsFunctions';
+import jwt_decode from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 class Posts extends Component {
+    constructor(){
+        super()
+        this.state = {
+            descricao:'',
+            user:{},
+            posts:[]
+        };
+    }
+    onChange = (e)=>{
+        this.setState({[e.target.name]:e.target.value});
+    }
+    onSubmit = (e)=>{
+        e.preventDefault();
+        const token = localStorage.usertoken;
+        const decoded = jwt_decode(token);
+        const post = {
+            descricao:this.state.descricao,
+            likes:0,
+            dislikes:0,
+            fkUsuario:decoded.id
+        }
+
+        createPost(post).then(res=>{
+            if(res){
+                Swal.fire({
+                    title:'Sucesso!',
+                    text:'Post foi criado com sucesso!',
+                    type:'success'
+                }).then(willDelete=>{window.location.reload();})
+            }else{
+                Swal.fire({
+                    title:'Erro!',
+                    text:'Post não pôde ser criado, tente novamente.',
+                    type:'error'
+                });
+            }
+        });
+    }
+
+    componentWillMount(){
+        const token = localStorage.usertoken;
+        const decoded = jwt_decode(token);
+        selectPosts().then(res=>{
+            this.setState({posts:res.data});
+        }); 
+        
+    }
+
   render() {
     return (
       <section className="container">
@@ -10,61 +61,33 @@ class Posts extends Component {
            <div className="post-form-header bg-primary">
                <h3>Diga algo...</h3>
            </div>
-           <form className="form my-1">
-               <textarea cols="30" rows="5" placeholder="Crie seu post..."></textarea>
+           <form onSubmit={this.onSubmit} className="form my-1">
+               <textarea name='descricao' onChange={this.onChange} cols="30" rows="5" placeholder="Crie seu post..."></textarea>
                <input type="submit" value="Enviar" className="btn btn-dark my-1" />
            </form>
            <div className="posts">
-               <div className="post bg-white my-1">
+               {this.state.posts.map(post=>(
+                <div className="post bg-white my-1">
                    <div>
                        <a href="profile">
-                           <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="" className="round-img" />
-                           <h4>John Doe</h4>
+                           <img src={post.img_link} alt="" className="round-img" />
+                           <h4>{post.nome}</h4>
                        </a>
                    </div>
                    <div>
                        <p className="my-1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac facilisis orci, sit amet
-                        sollicitudin metus. Duis venenatis odio felis, sit amet egestas mi gravida at. Nam id odio euismod,
-                        mollis ipsum sit amet, bibendum quam. Vestibulum ante ipsum primis in faucibus orci luctus et
-                        ultrices posuere cubilia Curae; In id accumsan odio. Mauris id feugiat lectus. Suspendisse sem eros,
-                        vestibulum eget elementum sit amet, bibendum ut nisl. Nulla hendrerit commodo libero interdum
-                        consectetur. Vestibulum a massa dignissim, vulputate lacus egestas, feugiat leo.
+                        {post.descricao}
                        </p>
                        <button className="btn">
-                           <i className="fas fa-thumbs-up"></i> <span>4</span>
+                           <i className="fas fa-thumbs-up"></i> <span>{post.likes}</span>
                        </button>
                        <button className="btn">
-                           <i className="fas fa-thumbs-down"></i> <span>2</span>
+                           <i className="fas fa-thumbs-down"></i> <span>{post.dislikes}</span>
                        </button>
                        <a href="post" className="btn btn-primary">Discussão</a>
                    </div>
                </div>
-               <div className="post bg-white my-1">
-                <div>
-                    <a href="profile">
-                        <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="" className="round-img" />
-                        <h4>John Doe</h4>
-                    </a>
-                </div>
-                <div>
-                    <p className="my-1">
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac facilisis orci, sit amet
-                     sollicitudin metus. Duis venenatis odio felis, sit amet egestas mi gravida at. Nam id odio euismod,
-                     mollis ipsum sit amet, bibendum quam. Vestibulum ante ipsum primis in faucibus orci luctus et
-                     ultrices posuere cubilia Curae; In id accumsan odio. Mauris id feugiat lectus. Suspendisse sem eros,
-                     vestibulum eget elementum sit amet, bibendum ut nisl. Nulla hendrerit commodo libero interdum
-                     consectetur. Vestibulum a massa dignissim, vulputate lacus egestas, feugiat leo.
-                    </p>
-                    <button className="btn">
-                        <i className="fas fa-thumbs-up"></i> <span>4</span>
-                    </button>
-                    <button className="btn">
-                        <i className="fas fa-thumbs-down"></i> <span>2</span>
-                    </button>
-                    <a href="post" className="btn btn-primary">Discussão</a>
-                </div>
-            </div>
+               ))}
            </div>
        </div>
     </section>

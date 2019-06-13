@@ -73,11 +73,12 @@ user.get('/select_all', (req, res) => {
 
 user.post('/update', (req, res) => {
     banco.conectar().then(pool => {
-        let { nome, cargo, empresa, cidade, estado, bio, email, img_link } = req.body;
+        let { nome, cargo, empresa, cidade, estado, bio, email, img_link, id } = req.body;
+        console.log(`Chegou pro update: ${JSON.stringify(req.body)}`);
         return pool.request().query(`UPDATE Usuario2 SET nome = '${nome}', cargo = '${cargo}', empresa = '${empresa}', cidade = '${cidade}'
-        , estado = '${estado}',bio = '${bio}', email = '${email}', img_link = '${img_link}' WHERE id = ${req.body.id}`);
+        , estado = '${estado}',bio = '${bio}', email = '${email}', img_link = '${img_link}' WHERE id = ${id}`);
     }).then(() => {
-
+        res.sendStatus(200);
     }).finally(() => {
         banco.sql.close();
     })
