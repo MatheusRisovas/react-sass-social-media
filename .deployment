@@ -1,2 +1,2 @@
 [config]
-project = client/build
+project = .
