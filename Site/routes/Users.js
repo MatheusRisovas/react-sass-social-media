@@ -25,9 +25,9 @@ process.env.SECRET_KEY = 'secret';
 // Select com SQL Server
 
 user.get('/select', (req, res) => {
-    banco.conectar2().then(() => {
+    banco.conectar().then(pool => {
         let id = req.query.id;
-        return banco.sql.query(`SELECT * FROM Usuario2 where id = ${id}`);
+        return pool.request().query(`SELECT * FROM Usuario2 where id = ${id}`);
     }).then(consulta => {
         res.send(consulta.recordset[0]);
     }).finally(() => {
