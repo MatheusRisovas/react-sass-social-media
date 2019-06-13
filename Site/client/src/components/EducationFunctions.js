@@ -8,16 +8,21 @@ export const createEdu = newEducation => {
             area_de_estudo: newEducation.area_de_estudo,
             data_inicio: newEducation.data_inicio,
             data_fim: newEducation.data_fim,
-            descricao: newEducation.descricao
+            descricao: newEducation.descricao,
+            fkUsuario: newEducation.fkUsuario
         })
         .then(res => {
             return res;
         })
 }
 
-export const selectEdu = () => {
+export const selectEdu = (id) => {
     return axios
-        .get('education/select', (req, res) => {
+        .get('education/select', {
+            params: {
+                id: id
+            }
+        }, (req, res) => {
             res.send(res);
         })
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {createEdu} from './EducationFunctions';
 import Swal from 'sweetalert2';
+import jwt_decode from 'jwt-decode';
 
 class AddEdu extends Component {
     constructor(){
@@ -14,19 +15,22 @@ class AddEdu extends Component {
             descricao:''
         }
     }
+
     onChange = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
     onSubmit = (e)=>{
         e.preventDefault();
-
+        const token = localStorage.usertoken;
+        const decoded = jwt_decode(token);
         const education = {
             instituicao:this.state.instituicao,
             grau:this.state.grau,
             area_de_estudo:this.state.area_de_estudo,
             data_inicio:this.state.data_inicio,
             data_fim:this.state.data_fim,
-            descricao:this.state.descricao
+            descricao:this.state.descricao,
+            fkUsuario: decoded.id
         }
 
         createEdu(education).then(res=>{

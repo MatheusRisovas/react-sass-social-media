@@ -29,7 +29,7 @@ class Profiles extends Component {
                     <h2>{user.nome}</h2>
                     <p>{user.position} em {user.empresa}</p>
                     <p>{user.cidade}, {user.estado}</p>
-                    <Link to='/profile' className="btn btn-primary">Ver Perfil</Link>
+                    <Link to={{pathname:'/profile',state:{idAtual:user.id}}}  className="btn btn-primary">Ver Perfil</Link>
                 </div>
                 <ul>
                     <li className="text-primary">

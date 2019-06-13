@@ -28,9 +28,9 @@ process.env.SECRET_KEY = 'secret';
 
 education.post('/create', (req, res) => {
     banco.conectar().then(pool => {
-        let { instituicao, grau, area_de_estudo, data_inicio, data_fim, descricao } = req.body;
+        let { instituicao, grau, area_de_estudo, data_inicio, data_fim, descricao, fkUsuario } = req.body;
         return pool.request().query(`INSERT INTO Edu VALUES
-        ('${instituicao}','${grau}','${area_de_estudo}','${data_inicio}','${data_fim}','${descricao}')`);
+        ('${instituicao}','${grau}','${area_de_estudo}','${data_inicio}','${data_fim}','${descricao}', ${fkUsuario})`);
     }).then(() => {
         res.sendStatus(200);
     }).finally(() => {
@@ -45,6 +45,7 @@ education.post('/create', (req, res) => {
 
 education.get('/select', (req, res) => {
     banco.conectar().then(pool => {
+        let id = req.query.id;
         return pool.request().query(`SELECT 
             id,
             instituicao,
@@ -52,7 +53,7 @@ education.get('/select', (req, res) => {
             descricao,
             FORMAT(data_inicio,'dd/MM/yyyy') as data_inicio, 
             FORMAT(data_fim,'dd/MM/yyyy') as data_fim
-        FROM Edu`);
+        FROM Edu WHERE fkUsuario = ${id}`);
     }).then(consulta => {
         res.send(consulta.recordset);
     }).finally(() => {

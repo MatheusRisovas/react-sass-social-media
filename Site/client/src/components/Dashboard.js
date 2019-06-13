@@ -64,10 +64,10 @@ class Dashboard extends Component {
         selectProfile(decoded.id).then(res=>{
             this.setState({user:res.data});
         }); 
-        selectExp().then(res=>{
+        selectExp(decoded.id).then(res=>{
             this.setState({experiences:res.data});            
         });
-        selectEdu().then(res=>{
+        selectEdu(decoded.id).then(res=>{
             this.setState({education:res.data});
         })
     }

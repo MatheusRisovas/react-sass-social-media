@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import {createExp} from './ExperiencesFunctions';
 import Swal from 'sweetalert2';
+import jwt_decode from 'jwt-decode';
 
 class AddExp extends Component {
+    
     constructor(){
         super()
         this.state = {
@@ -13,18 +15,21 @@ class AddExp extends Component {
             descricao:''
         }
     }
+
     onChange = (e)=>{
         this.setState({[e.target.name]:e.target.value});
     }
     onSubmit = (e)=>{
         e.preventDefault();
-
+        const token = localStorage.usertoken;
+        const decoded = jwt_decode(token);
         const experience = {
             empresa:this.state.empresa,
             cargo:this.state.cargo,
             data_inicio:this.state.data_inicio,
             data_fim:this.state.data_fim,
-            descricao:this.state.descricao
+            descricao:this.state.descricao,
+            fkUsuario: decoded.id
         }
 
         createExp(experience).then(res=>{

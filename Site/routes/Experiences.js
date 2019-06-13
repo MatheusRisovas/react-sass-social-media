@@ -28,9 +28,9 @@ process.env.SECRET_KEY = 'secret';
 experience.post('/create', (req, res) => {
     banco.conectar().then(pool => {
         console.log(`Chegou pro cadastro: ${JSON.stringify(req.body)}`);
-        let { empresa, cargo, data_inicio, data_fim, descricao } = req.body;
+        let { empresa, cargo, data_inicio, data_fim, descricao, fkUsuario } = req.body;
         return pool.request().query(`INSERT INTO Exp VALUES ('${empresa}','${cargo}','${data_inicio}','${data_fim}',
-        '${descricao}')`);
+        '${descricao}',${fkUsuario})`);
     }).then(() => {
         res.sendStatus(200);
     }).finally(() => {
@@ -45,6 +45,7 @@ experience.post('/create', (req, res) => {
 
 experience.get('/select', (req, res) => {
     banco.conectar().then(pool => {
+        let id = req.query.id;
         return pool.request().query(`SELECT 
             id,
             empresa,
@@ -52,7 +53,7 @@ experience.get('/select', (req, res) => {
             FORMAT(data_inicio,'dd/MM/yyyy') as data_inicio,
             FORMAT(data_fim,'dd/MM/yyyy') as data_fim,
             descricao
-        FROM Exp`);
+        FROM Exp WHERE fkUsuario = ${id}`);
     }).then(consulta => {
         res.send(consulta.recordset);
     }).finally(() => {

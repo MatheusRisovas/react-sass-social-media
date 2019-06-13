@@ -19,6 +19,7 @@ class Profile extends Component {
   componentWillMount(){
     const token = localStorage.usertoken;
     const decoded = jwt_decode(token);
+    console.log('ID DO USER:'+this.props.location.state.id);
     selectProfile(decoded.id).then(res=>{
       this.setState({user:res.data});
     })
