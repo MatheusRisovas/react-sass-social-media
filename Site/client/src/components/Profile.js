@@ -16,17 +16,19 @@ class Profile extends Component {
       user:{}
     };
 }
-  componentWillMount(){
-    const token = localStorage.usertoken;
-    const decoded = jwt_decode(token);
-    console.log('ID DO USER:'+this.props.location.state.id);
-    selectProfile(decoded.id).then(res=>{
+
+  componentDidMount(){
+    let {userId} = this.props.match.params;
+    console.log(`ID: ${userId}`);
+    // const token = localStorage.usertoken;
+    // const decoded = jwt_decode(token);
+    selectProfile(userId).then(res=>{
       this.setState({user:res.data});
     })
-    selectExp(decoded.id).then(res => {
+    selectExp(userId).then(res => {
       this.setState({experiences:res.data});
     });
-    selectEdu(decoded.id).then(res => {
+    selectEdu(userId).then(res => {
       this.setState({education:res.data});
     });
     console.log(this.state.user.img_link);

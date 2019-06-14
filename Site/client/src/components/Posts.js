@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {selectPosts, createPost} from './PostsFunctions';
 import jwt_decode from 'jwt-decode';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 class Posts extends Component {
     constructor(){
@@ -84,7 +85,7 @@ class Posts extends Component {
                        <button className="btn">
                            <i className="fas fa-thumbs-down"></i> <span>{post.dislikes}</span>
                        </button>
-                       <a href="post" className="btn btn-primary">Discussão</a>
+                       <Link to={`/post/${post.id}`} className="btn btn-primary">Discussão</Link>
                    </div>
                </div>
                ))}

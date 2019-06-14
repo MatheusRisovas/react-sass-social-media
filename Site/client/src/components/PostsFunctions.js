@@ -7,6 +7,13 @@ export const selectPosts = () => {
         });
 }
 
+export const selectPost = (id) => {
+    return axios
+        .get(`../posts/select`, { params: { id } }, (req, res) => {
+            res.send(res);
+        });
+}
+
 export const createPost = newPost => {
     return axios
         .post('posts/create', {
@@ -18,4 +25,23 @@ export const createPost = newPost => {
         .then(res => {
             return res;
         })
+}
+
+export const createComent = newComent => {
+    return axios
+        .post('../posts/create_comment', {
+            descricao: newComent.descricao,
+            fkUsuario: newComent.fkUsuario,
+            fkPost: newComent.fkPost
+        })
+        .then(res => {
+            return res;
+        })
+};
+
+export const selectComents = (id) => {
+    return axios
+        .get('../posts/select_comment', { params: { id } }, (req, res) => {
+            res.send(res);
+        });
 }

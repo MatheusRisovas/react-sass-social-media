@@ -1,76 +1,97 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { selectPost, createComent, selectComents } from './PostsFunctions';
+import jwt_decode from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 class Post extends Component {
+    constructor(){
+        super()
+        this.state = {
+            novoComent:'',
+            post:{},
+            comentarios:[]
+        };
+    }
+
+    onChange = (e)=>{
+        this.setState({[e.target.name]:e.target.value});
+    }
+    onSubmit = (e)=>{
+        e.preventDefault();
+        const token = localStorage.usertoken;
+        const decoded = jwt_decode(token);
+        const coment = {
+            descricao:this.state.novoComent,
+            fkUsuario:decoded.id,
+            fkPost:this.state.post.id
+        }
+        createComent(coment).then(res=>{
+            if(res){
+                Swal.fire({
+                    title:'Sucesso!',
+                    text:'Comentário foi criado com sucesso!',
+                    type:'success'
+                }).then(willDelete=> window.location.reload());
+            }else{
+                Swal.fire({
+                    title:'Erro!',
+                    text:'Comentário não pode ser criado, tente novamente.',
+                    type:'error'
+                });
+            }
+        });
+    }
+    componentDidMount(){
+        let {postId} = this.props.match.params;
+        console.log(`ID: ${postId}`);
+        selectPost(postId).then(res=>{
+          this.setState({post:res.data});
+        });
+        selectComents(postId).then(res=>this.setState({comentarios:res.data}));
+      }
   render() {
     return (
       <section className="container">
-        <a href="posts" className="btn">Back to posts</a>
+        <a href="../posts" className="btn">Voltar Aos Posts</a>
         <div className="post bg-white p-1 my-1">
             <div>
                 <a href="profile">
-                    <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt=""
+                    <img src={this.state.post.img_link} alt=""
                         className="round-img" />
-                    <h4>John Doe</h4>
+                    <h4>{this.state.post.nome}</h4>
                 </a>
             </div>
             <div>
                 <p className="my-1">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac facilisis orci, sit amet
-                    sollicitudin metus. Duis venenatis odio felis, sit amet egestas mi gravida at. Nam id odio euismod,
-                    mollis ipsum sit amet, bibendum quam. Vestibulum ante ipsum primis in faucibus orci luctus et
-                    ultrices posuere cubilia Curae; In id accumsan odio. Mauris id feugiat lectus. Suspendisse sem eros,
-                    vestibulum eget elementum sit amet, bibendum ut nisl. Nulla hendrerit commodo libero interdum
-                    consectetur. Vestibulum a massa dignissim, vulputate lacus egestas, feugiat leo.
+                    {this.state.post.descricao}
                 </p>
             </div>
         </div>
         <div className="post-form">
             <div className="post-form-header bg-primary">
-                <h3>Leave A Comment</h3>
+                <h3>Deixe seu comentário.</h3>
             </div>
-            <form className="form my-1">
-                <textarea name="text" cols="30" rows="5" placeholder="Comment on this post"></textarea>
-                <input type="submit" value="Submit" className="btn btn-dark my-1" />
+            <form onSubmit={this.onSubmit} className="form my-1">
+                <textarea name="text" cols="30" rows="5" onChange={this.onChange} name='novoComent' placeholder="Digite seu comentário..."></textarea>
+                <input type="submit" value="Enviar" className="btn btn-dark my-1" />
             </form>
         </div>
-        <div className="post bg-white my-1">
+        {this.state.comentarios.map(comentario =>(
+            <div className="post bg-white my-1">
             <div>
                 <a href="profile">
-                    <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt=""
+                    <img src={comentario.img_link} alt=""
                         className="round-img" />
-                    <h4>John Doe</h4>
+                    <h4>{comentario.nome}</h4>
                 </a>
             </div>
             <div>
                 <p className="my-1">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac facilisis orci, sit amet
-                    sollicitudin metus. Duis venenatis odio felis, sit amet egestas mi gravida at. Nam id odio euismod,
-                    mollis ipsum sit amet, bibendum quam. Vestibulum ante ipsum primis in faucibus orci luctus et
-                    ultrices posuere cubilia Curae; In id accumsan odio. Mauris id feugiat lectus. Suspendisse sem eros,
-                    vestibulum eget elementum sit amet, bibendum ut nisl. Nulla hendrerit commodo libero interdum
-                    consectetur. Vestibulum a massa dignissim, vulputate lacus egestas, feugiat leo.
+                    {comentario.descricao}
                 </p>
             </div>
         </div>
-        <div className="post bg-white my-1">
-            <div>
-                <a href="profile">
-                    <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt=""
-                        className="round-img" />
-                    <h4>John Doe</h4>
-                </a>
-            </div>
-            <div>
-                <p className="my-1">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac facilisis orci, sit amet
-                    sollicitudin metus. Duis venenatis odio felis, sit amet egestas mi gravida at. Nam id odio euismod,
-                    mollis ipsum sit amet, bibendum quam. Vestibulum ante ipsum primis in faucibus orci luctus et
-                    ultrices posuere cubilia Curae; In id accumsan odio. Mauris id feugiat lectus. Suspendisse sem eros,
-                    vestibulum eget elementum sit amet, bibendum ut nisl. Nulla hendrerit commodo libero interdum
-                    consectetur. Vestibulum a massa dignissim, vulputate lacus egestas, feugiat leo.
-                </p>
-            </div>
-        </div>
+        ))}
     </section>
     )
   }

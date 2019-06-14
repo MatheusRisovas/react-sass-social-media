@@ -20,14 +20,21 @@ export const updateProfile = (Profile, ID) => {
 
 export const selectProfile = (ID) => {
     return axios
-        .get(`user/select`, {
+        .get(`../user/select`, {
             params: {
                 id: ID
             }
         }, (req, res) => {
             res.send(res);
-        })
+        }).catch(err => {
+            if (err.response) {
+                console.log(err.response.data);
+                console.log(err.response.status);
+                console.log(err.response.header);
+            }
+        });
 }
+
 export const selectProfiles = () => {
     return axios
         .get(`user/select_all`, (req, res) => {

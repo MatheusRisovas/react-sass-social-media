@@ -24,13 +24,13 @@ function App() {
       <Route exact path='/register' component={Register} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/profiles' component={Profiles} />
-      <Route exact path='/profile' component={Profile} />
+      <Route exact path='/profile/:userId' component={Profile} />
       <Route exact path='/dashboard' component={Dashboard} />
       <Route exact path='/create-profile' component={CreateProfile} />
       <Route exact path='/add-experience' component={AddExp} />
       <Route exact path='/add-education' component={AddEdu} />
       <Route exact path='/posts' component={Posts} />
-      <Route exact path='/post' component={Post} />
+      <Route exact path='/post/:postId' component={Post} />
     </div>
     </Router>
   );

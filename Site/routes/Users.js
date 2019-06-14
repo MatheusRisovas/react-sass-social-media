@@ -26,9 +26,11 @@ process.env.SECRET_KEY = 'secret';
 
 user.get('/select', (req, res) => {
     banco.conectar().then(pool => {
+        console.log(`Chegou para a consulta id = ${req.query.id}`);
         let id = req.query.id;
         return pool.request().query(`SELECT * FROM Usuario2 where id = ${id}`);
     }).then(consulta => {
+        console.log(`Usuário encontrado: ${consulta.recordset}`);
         res.send(consulta.recordset[0]);
     }).finally(() => {
         banco.sql.close();

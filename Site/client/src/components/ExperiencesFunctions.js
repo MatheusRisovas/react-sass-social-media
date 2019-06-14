@@ -17,7 +17,7 @@ export const createExp = newExperience => {
 
 export const selectExp = (id) => {
     return axios
-        .get('experience/select', {
+        .get('../experience/select', {
             params: {
                 id: id
             }

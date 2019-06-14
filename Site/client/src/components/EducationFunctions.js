@@ -18,7 +18,7 @@ export const createEdu = newEducation => {
 
 export const selectEdu = (id) => {
     return axios
-        .get('education/select', {
+        .get('../education/select', {
             params: {
                 id: id
             }
